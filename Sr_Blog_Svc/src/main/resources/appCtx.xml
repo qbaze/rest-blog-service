@@ -1,0 +1,38 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mongo="http://www.springframework.org/schema/data/mongo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/data/mongo
+http://www.springframework.org/schema/data/mongo/spring-mongo-1.0.xsd">
+
+	<context:annotation-config />
+	
+	<mongo:mongo host="localhost" port="27017">
+		<mongo:options connections-per-host="8"
+			threads-allowed-to-block-for-connection-multiplier="4"
+			connect-timeout="1000" max-wait-time="1500" auto-connect-retry="true"
+			socket-keep-alive="true" socket-timeout="1500" slave-ok="true"
+			write-number="1" write-timeout="0" write-fsync="true" />
+	</mongo:mongo>
+
+	<mongo:db-factory dbname="posts" mongo-ref="mongo" />
+
+	<bean id="mongoOperations" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
+	</bean>
+
+	<bean name="postDao" class="com.sr.blog.service.impl.DataAccessObjectImpl">
+		<constructor-arg type="java.lang.Class" value="com.sr.blog.model.Post"/>
+		<constructor-arg type="java.lang.String" value="posts"/>
+	</bean>
+	
+	<bean name="commentDao" class="com.sr.blog.service.impl.DataAccessObjectImpl">
+		<constructor-arg type="java.lang.Class" value="com.sr.blog.model.Comment"/>
+		<constructor-arg type="java.lang.String" value="comments"/>
+	</bean>
+
+	<bean name="postService" class="com.sr.blog.service.impl.PostServiceImpl" />
+</beans>

@@ -1,6 +1,7 @@
 package com.sr.blog.service.rest;
 
 import java.net.URI;
+import java.util.Map;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -69,8 +70,12 @@ public class BlogService {// implements IBlogService {
 	}
 
 	@POST
-	@Path("/posts")
+	@Path("/posts$")
 	public Response createPost(Post data) {
+		if (data == null){
+			throw new WebApplicationException(Response.Status.BAD_REQUEST);
+		}
+		
 		Post post = postService.createPost(data.getTitle(), data.getBody());
 		URI location = uriInfo.getAbsolutePathBuilder().path(post.getId())
 				.build();
@@ -86,18 +91,20 @@ public class BlogService {// implements IBlogService {
 	
 	@POST
 	@Path("/posts/{id}/body")
-	public Response updatePostBody(Post data) {
-		Post post = postService.createPost(data.getTitle(), data.getBody());
-		URI location = uriInfo.getAbsolutePathBuilder().path(post.getId())
-				.build();
-		EntityTag eTag = new EntityTag(post.getId() + "_"
-				+ post.getUpdated().getMillis());
-		CacheControl cacheControl = new CacheControl();
+	public Response updatePostBody(@PathParam("id") String postId, Map<String, String> body) {
+		//Post post = postService.getById(postId);
+		
+		//post.setBody(body);
+		
+		URI location = uriInfo.getBaseUriBuilder().path("/posts/" + postId).build();
 
-		cacheControl.setMaxAge(-1);
+//		EntityTag eTag = new EntityTag(post.getId() + "_"
+//				+ post.getUpdated().getMillis());
+//		CacheControl cacheControl = new CacheControl();
+//
+//		cacheControl.setMaxAge(-1);
 
-		return Response.created(location).cacheControl(cacheControl).tag(eTag)
-				.build();
+		return Response.seeOther(location).build();
 	}
 
 	@DELETE
@@ -163,6 +170,8 @@ public class BlogService {// implements IBlogService {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
 
-		return Response.noContent().build();
+		URI location = uriInfo.getBaseUriBuilder().path("blog/posts/" + postId).build();
+		
+		return Response.seeOther(location).build();
 	}
 }

@@ -13,42 +13,49 @@ localhost:8080
 SUPPORTED SERVICE OPERATIONS:
 
 Content-Type: application/json
+
 Conditional requests supported
 
 - Create a post:
-Post
-/blog/{blogId}/posts
 
-{
-  "title":"Post title",
-  "body":"Post body"
-}
+	Post
+	/blog/{blogId}/posts
+
+	{
+		"title":"Post title",
+  	"body":"Post body"
+	}
 
 - Get a post:
-Get
-/blog/{blogId}/posts/{postId}
+
+	Get
+	/blog/{blogId}/posts/{postId}
 
 - Update a post:
-Put
-/blog/{blogId}/posts/{postId}
 
-{
-  "title":"Post title",
-  "body":"Post body"
-}
+	Put
+	/blog/{blogId}/posts/{postId}
+
+	{
+  	"title":"Post title",
+  	"body":"Post body"
+	}
 
 - Delete a post:
-Delete
-/blog/{blogId}/posts/{postId}
+
+	Delete
+	/blog/{blogId}/posts/{postId}
 
 - Add a comment:
-Post
-/blog/{blogId}/posts/{postId}/comments
 
-{
-  "body":"comment body"
-}
+	Post
+	/blog/{blogId}/posts/{postId}/comments
+
+	{
+  	"body":"comment body"
+	}
 
 - Delete a comment:
-Delete
-/blog/{blogId}/posts/{postId}/comments/{commentId}
+
+	Delete
+	/blog/{blogId}/posts/{postId}/comments/{commentId}

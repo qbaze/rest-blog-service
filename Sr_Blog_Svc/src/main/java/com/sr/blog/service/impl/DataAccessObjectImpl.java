@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import com.sr.blog.model.Comment;
 import com.sr.blog.service.api.IDataAccessObject;
@@ -56,9 +57,17 @@ public class DataAccessObjectImpl<ID, T> implements IDataAccessObject<ID, T> {
 
 	@Override
 	public T update(T data) {
-		// TODO Auto-generated method stub
-		return null;
+		mongoOperations.save(data, getCollectionName());
+		
+		return data;
 	}
+	
+	@Override
+	public T updatePartial(ID id, Update update) {
+		Query query = query(where("id").is(id));
+		
+		return mongoOperations.findAndModify(query, update, type, getCollectionName());
+	}		
 
 	@Override
 	public List<T> getByQuery(Query query) {

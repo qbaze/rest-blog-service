@@ -1,13 +1,16 @@
 package com.sr.blog.model;
 
-public class User {
-	private String name;
+import javax.xml.bind.annotation.XmlType;
 
-	public String getName() {
-		return name;
+@XmlType
+public class User extends AbstractResource {
+	private String displayName;
+
+	public String getDisplayName() {
+		return displayName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 }

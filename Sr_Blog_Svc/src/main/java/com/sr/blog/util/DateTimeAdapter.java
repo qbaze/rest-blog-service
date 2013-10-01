@@ -10,6 +10,10 @@ public class DateTimeAdapter extends XmlAdapter<String, DateTime> {
 	}
 
 	public String marshal(DateTime v) throws Exception {
+		if (v == null){
+			return null;
+		}
+		
 		return v.toString();
 	}
 }

@@ -2,27 +2,14 @@ package com.sr.blog.model;
 
 import javax.xml.bind.annotation.XmlType;
 
-import org.joda.time.DateTime;
-
-@XmlType(propOrder={"id", "postId", "created", "body"})
-public class Comment {
-	private String id;
-
-	private String postId;
-
-	private DateTime created;
+@XmlType(propOrder={"links", "id", "post", "created", "updated", "author", "body"})
+public final class Comment extends AbstractResource {
+	private Post post;
 	private String body;
+	private User author;
 
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public void setPostId(String postId) {
-		this.postId = postId;
-	}
-
-	public void setCreated(DateTime creationDate) {
-		this.created = creationDate;
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	public void setBody(String content) {
@@ -33,15 +20,20 @@ public class Comment {
 		return body;
 	}
 
-	public DateTime getCreated() {
-		return created;
+	public Post getPost() {
+		return post;
 	}
 
-	public String getId() {
-		return id;
+	public User getAuthor() {
+		return author;
 	}
 
-	public String getPostId() {
-		return postId;
+	public void setAuthor(User author) {
+		this.author = author;
+	}
+	
+	@SuppressWarnings("unused")
+	private void setUpdated(){
+		
 	}
 }

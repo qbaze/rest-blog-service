@@ -12,10 +12,10 @@ localhost:8080
 
 SUPPORTED SERVICE OPERATIONS:
 
-- Content-Type: application/json
-- Conditional requests supported
+Content-Type: application/json
+Conditional requests supported
 
--- Create a post:
+- Create a post:
 Post
 /blog/{blogId}/posts
 
@@ -24,11 +24,11 @@ Post
   "body":"Post body"
 }
 
--- Get a post:
+- Get a post:
 Get
 /blog/{blogId}/posts/{postId}
 
--- Update a post:
+- Update a post:
 Put
 /blog/{blogId}/posts/{postId}
 
@@ -37,11 +37,11 @@ Put
   "body":"Post body"
 }
 
--- Delete a post:
+- Delete a post:
 Delete
 /blog/{blogId}/posts/{postId}
 
--- Add a comment:
+- Add a comment:
 Post
 /blog/{blogId}/posts/{postId}/comments
 
@@ -49,6 +49,6 @@ Post
   "body":"comment body"
 }
 
--- Delete a comment:
+- Delete a comment:
 Delete
 /blog/{blogId}/posts/{postId}/comments/{commentId}

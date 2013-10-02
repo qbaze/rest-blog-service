@@ -10,6 +10,11 @@ The test server starts by default on:
 
 localhost:8080
 
+It requires MongoDB to be started locally by default.
+
+dbname: blog
+collections: posts, comments
+
 SUPPORTED SERVICE OPERATIONS:
 
 Content-Type: application/json
